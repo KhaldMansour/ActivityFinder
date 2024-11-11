@@ -1,31 +1,30 @@
-import { Entity, Column, BeforeInsert, PrimaryGeneratedColumn , Unique, ManyToMany, JoinTable } from 'typeorm';
-
-const bcrypt = require("bcrypt");
+import { Entity, Column, BeforeInsert, PrimaryGeneratedColumn  } from 'typeorm';
+import * as bcrypt from 'bcryptjs';
 
 @Entity('users')
 export class User {
     @PrimaryGeneratedColumn()
-    id: number;
+      id: number;
   
     @Column({nullable: true})
-    firstName: string;
+      firstName: string;
   
     @Column({nullable: true})
-    lastName: string;
+      lastName: string;
 
     @Column({unique : true})
-    email: string;
+      email: string;
 
     @Column()
-    password: string;
+      password: string;
   
     @Column({ default: false })
-    isAdmin: boolean;
+      isAdmin: boolean;
 
     @BeforeInsert()
     async hashPassword() {
-        if (this.password) {
-            this.password = await bcrypt.hash(this.password);
-        }
+      if (this.password) {
+        this.password = await bcrypt.hash(this.password, 10);
+      }
     }
 }
