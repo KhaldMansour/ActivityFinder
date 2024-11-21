@@ -10,7 +10,7 @@ export const typeOrmConfig = {
     username: configService.get<string>('DB_USERNAME'), 
     password: configService.get<string>('DB_PASSWORD'),
     database: configService.get<string>('DB_DATABASE'),
-    synchronize: false, // Set to false in production
+    synchronize: false, 
     entities: [__dirname + '/../**/*.entity{.ts,.js}'], 
     migrations: [__dirname + '/../migrations/**/*{.ts,.js}']
   }),
