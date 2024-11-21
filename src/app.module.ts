@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { TypeOrmModule  } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 
@@ -7,6 +7,7 @@ import { AppService } from './app.service';
 import { typeOrmConfig } from './config/typeorm.config';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { AuthGuard } from './auth/middlewares/auth.guard';
 
 @Module({
   imports: [
@@ -21,14 +22,14 @@ import { AuthModule } from './auth/auth.module';
   providers: [AppService]
 })
 export class AppModule {
-  // configure(consumer: MiddlewareConsumer) {
-  //   consumer
-  //     .apply(AuthGuard)
-  //     .exclude(
-  //       { path: 'api/auth/login', method: RequestMethod.POST },
-  //       { path: 'api/auth/register', method: RequestMethod.POST }
-  //     )
-  //     .forRoutes('*')
-  //     ;
-  // }
+  configure(consumer: MiddlewareConsumer) : void {
+    consumer
+      .apply(AuthGuard)
+      .exclude(
+        { path: '/auth/login', method: RequestMethod.POST },
+        { path: '/auth/register', method: RequestMethod.POST }
+      )
+      .forRoutes('*')
+    ;
+  }
 }
