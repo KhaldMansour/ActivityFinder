@@ -37,7 +37,15 @@ module.exports = {
       "error",
       { "blocks": "never", "classes": "never", "switches": "never" }
     ],
-
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      {
+        "allowExpressions": false,       // Enforce return types for all functions, even inline ones
+        "allowTypedFunctionExpressions": true, // Allow explicitly typed function expressions
+        "allowHigherOrderFunctions": true, // Allow higher-order functions without return type
+        "allowDirectConstAssertionInArrowFunctions": true // Allow `const` assertions in arrow functions
+      }
+    ],
     // Code Consistency and Style
     "semi": ["error", "always"],
     "quotes": ["error", "single"],
@@ -65,7 +73,7 @@ module.exports = {
     "@typescript-eslint/no-inferrable-types": "warn",
 
     // Import and Module Management
-    "import/no-unresolved": "error",
+    "import/no-unresolved": "warn",
     "import/order": [
       "warn",
       {
