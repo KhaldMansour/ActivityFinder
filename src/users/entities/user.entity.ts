@@ -1,5 +1,7 @@
-import { Entity, Column, BeforeInsert, PrimaryGeneratedColumn  } from 'typeorm';
+import { Entity, Column, BeforeInsert, PrimaryGeneratedColumn, OneToMany  } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
+import { Activity } from 'src/activity/entities/activity.entity';
+import { Exclude } from 'class-transformer';
 
 @Entity('users')
 export class User {
@@ -13,16 +15,22 @@ export class User {
       lastName: string;
 
     @Column({unique : true})
+    @Exclude()
       email: string;
 
     @Column()
+    @Exclude()
       password: string;
   
     @Column({ default: false })
+    @Exclude()
       isAdmin: boolean;
+    
+    @OneToMany(() => Activity, (activity) => activity.supplier)
+      activities: Activity[];
 
     @BeforeInsert()
-    async hashPassword() : Promise <void> {
+    async hashPassword(): Promise <void> {
       if (this.password) {
         this.password = await bcrypt.hash(this.password, 10);
       }
