@@ -92,5 +92,12 @@ module.exports = {
 
     // Unused Imports
     'unused-imports/no-unused-imports': 'error'
-  }
+  },
+  settings: {
+    'import/resolver': {
+      typescript: {
+        alwaysTryTypes: true,
+      },
+    },
+  },
 };

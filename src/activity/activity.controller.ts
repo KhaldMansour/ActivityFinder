@@ -1,7 +1,8 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Request } from '@nestjs/common';
 import { Request as ExpressRequest } from 'express';
-import { User } from 'src/users/entities/user.entity';
 import { plainToInstance } from 'class-transformer';
+
+import { User } from 'src/users/entities/user.entity';
 
 import { ActivityService } from './activity.service';
 import { CreateActivityDto } from './dto/create-activity.dto';

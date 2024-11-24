@@ -1,8 +1,9 @@
 import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from 'src/users/entities/user.entity';
 import { plainToInstance } from 'class-transformer';
+
+import { User } from 'src/users/entities/user.entity';
 
 import { Activity } from './entities/activity.entity';
 import { UpdateActivityDto } from './dto/update-activity.dto';

@@ -1,10 +1,11 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/users/entities/user.entity';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import * as bcrypt from 'bcryptjs';
+
+import { User } from 'src/users/entities/user.entity';
 
 import { RegisterUserDto } from './dto/register-user.dto';
 import { LoginDto } from './dto/login.dto';
@@ -23,7 +24,7 @@ export class AuthService {
     return await this.userRepository.save(user);
   }
 
-  async login(data: LoginDto): Promise <object> {
+  async login(data: LoginDto): Promise<{ access_token: string }> {
     const user = await this.userRepository.findOneBy({ email : data.email });
 
     if (!user) {

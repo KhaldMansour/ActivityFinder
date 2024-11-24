@@ -5,6 +5,7 @@ import {
   UnauthorizedException
 } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
+
 import { UsersService } from 'src/users/users.service';
 import { User } from 'src/users/entities/user.entity';
 
@@ -18,7 +19,7 @@ export class AuthGuard implements NestMiddleware {
   ) {}
   async use(request: Request, res: Response, next: NextFunction): Promise <void> {
     try {
-      const { authorization }: any = request.headers;
+      const { authorization }: { authorization?: string } = request.headers;
       if (!authorization || authorization.trim() === '') {
         throw new UnauthorizedException('Please provide token');
       }
@@ -32,7 +33,6 @@ export class AuthGuard implements NestMiddleware {
 
       return next();
     } catch (error) {
-      console.log('auth error - ', error.message);
       throw new ForbiddenException(
         error.message || 'session expired! Please sign In'
       );

@@ -1,5 +1,6 @@
-import { User } from 'src/users/entities/user.entity';
 import { Column, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+
+import { User } from 'src/users/entities/user.entity';
 
 @Entity('activities')
 export class Activity {

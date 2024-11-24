@@ -1,7 +1,8 @@
 import { Entity, Column, BeforeInsert, PrimaryGeneratedColumn, OneToMany  } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
-import { Activity } from 'src/activity/entities/activity.entity';
 import { Exclude } from 'class-transformer';
+
+import { Activity } from 'src/activity/entities/activity.entity';
 
 @Entity('users')
 export class User {
