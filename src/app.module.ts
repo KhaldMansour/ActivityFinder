@@ -8,6 +8,7 @@ import { typeOrmConfig } from './config/typeorm.config';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { AuthGuard } from './auth/middlewares/auth.guard';
+import { ActivityModule } from './activity/activity.module';
 
 @Module({
   imports: [
@@ -16,13 +17,14 @@ import { AuthGuard } from './auth/middlewares/auth.guard';
     }),
     TypeOrmModule.forRootAsync(typeOrmConfig),
     UsersModule,
-    AuthModule
+    AuthModule,
+    ActivityModule
   ],
   controllers: [AppController],
   providers: [AppService]
 })
 export class AppModule {
-  configure(consumer: MiddlewareConsumer) : void {
+  configure(consumer: MiddlewareConsumer): void {
     consumer
       .apply(AuthGuard)
       .exclude(
