@@ -18,12 +18,12 @@ export class AuthService {
     private configService: ConfigService
   ) {}
 
-  async register(registerUserDto : RegisterUserDto):  Promise <User> {
+  async register(registerUserDto: RegisterUserDto):  Promise <User> {
     const user = this.userRepository.create(registerUserDto);
     return await this.userRepository.save(user);
   }
 
-  async login(data : LoginDto) : Promise <object> {
+  async login(data: LoginDto): Promise <object> {
     const user = await this.userRepository.findOneBy({ email : data.email });
 
     if (!user) {

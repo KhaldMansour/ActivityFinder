@@ -16,7 +16,7 @@ export class AuthGuard implements NestMiddleware {
     private readonly authService: AuthService,
     private readonly userService: UsersService
   ) {}
-  async use(request: Request, res: Response, next: NextFunction) : Promise <void> {
+  async use(request: Request, res: Response, next: NextFunction): Promise <void> {
     try {
       const { authorization }: any = request.headers;
       if (!authorization || authorization.trim() === '') {
