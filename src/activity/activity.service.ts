@@ -1,7 +1,7 @@
 import {
   ForbiddenException,
   Injectable,
-  NotFoundException,
+  NotFoundException
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -17,16 +17,16 @@ import { CreateActivityDto } from './dto/create-activity.dto';
 export class ActivityService {
   constructor(
     @InjectRepository(Activity)
-    private readonly activityRepository: Repository<Activity>,
+    private readonly activityRepository: Repository<Activity>
   ) {}
 
   async create(
     user: User,
-    createActivityDto: CreateActivityDto,
+    createActivityDto: CreateActivityDto
   ): Promise<Activity> {
     const activity = this.activityRepository.create({
       ...createActivityDto,
-      supplier: user,
+      supplier: user
     });
 
     return await this.activityRepository.save(activity);
@@ -34,7 +34,7 @@ export class ActivityService {
 
   async findAll(): Promise<Activity[]> {
     const activities = await this.activityRepository.find({
-      relations: ['supplier'],
+      relations: ['supplier']
     });
 
     return plainToInstance(Activity, activities);
@@ -43,7 +43,7 @@ export class ActivityService {
   async findOne(id: number): Promise<Activity> {
     const activity = await this.activityRepository.findOne({
       where: { id },
-      relations: ['supplier'],
+      relations: ['supplier']
     });
 
     if (!activity) {
@@ -56,11 +56,11 @@ export class ActivityService {
   async update(
     id: number,
     updateActivityDto: UpdateActivityDto,
-    user: User,
+    user: User
   ): Promise<Activity> {
     const activity = await this.activityRepository.findOne({
       where: { id },
-      relations: ['supplier'],
+      relations: ['supplier']
     });
 
     if (!activity) {
@@ -69,7 +69,7 @@ export class ActivityService {
 
     if (activity.supplier.id !== user.id && !user.isAdmin) {
       throw new ForbiddenException(
-        'You are not authorized to update this activity',
+        'You are not authorized to update this activity'
       );
     }
 
@@ -81,7 +81,7 @@ export class ActivityService {
   async remove(id: number, user: User): Promise<Activity> {
     const activity = await this.activityRepository.findOne({
       where: { id },
-      relations: ['supplier'],
+      relations: ['supplier']
     });
 
     if (!activity) {
@@ -90,7 +90,7 @@ export class ActivityService {
 
     if (activity.supplier.id !== user.id && !user.isAdmin) {
       throw new ForbiddenException(
-        'You are not authorized to update this activity',
+        'You are not authorized to update this activity'
       );
     }
 

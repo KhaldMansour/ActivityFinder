@@ -20,17 +20,17 @@ async function bootstrap(): Promise<void> {
         bearerFormat: 'Bearer',
         scheme: 'Bearer',
         type: 'http',
-        in: 'Header',
+        in: 'Header'
       },
-      'JWT',
+      'JWT'
     )
     .build();
 
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api/docs', app, document, {
     swaggerOptions: {
-      persistAuthorization: true,
-    },
+      persistAuthorization: true
+    }
   });
 
   await app.listen(3000);

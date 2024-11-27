@@ -13,11 +13,11 @@ import { AuthService } from './auth.service';
     forwardRef(() => UsersModule),
     JwtModule.registerAsync({
       useFactory: JWTConfig,
-      inject: [ConfigService],
-    }),
+      inject: [ConfigService]
+    })
   ],
   controllers: [AuthController],
   providers: [AuthService],
-  exports: [AuthService],
+  exports: [AuthService]
 })
 export class AuthModule {}

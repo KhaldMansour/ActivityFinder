@@ -4,7 +4,7 @@ import {
   Index,
   JoinColumn,
   ManyToOne,
-  PrimaryGeneratedColumn,
+  PrimaryGeneratedColumn
 } from 'typeorm';
 
 import { User } from 'src/users/entities/user.entity';
@@ -12,22 +12,22 @@ import { User } from 'src/users/entities/user.entity';
 @Entity('activities')
 export class Activity {
   @PrimaryGeneratedColumn()
-  id: number;
+    id: number;
 
   @Column()
   @Index()
-  title: string;
+    title: string;
 
   @Column('float')
-  price: number;
+    price: number;
 
   @Column('float', { nullable: true })
-  rating: number;
+    rating: number;
 
   @Column({ default: false })
-  hasOffer: boolean;
+    hasOffer: boolean;
 
   @ManyToOne(() => User, (user) => user.activities, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id' })
-  supplier: User;
+    supplier: User;
 }

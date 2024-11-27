@@ -2,7 +2,7 @@ import {
   ForbiddenException,
   Injectable,
   NestMiddleware,
-  UnauthorizedException,
+  UnauthorizedException
 } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
 
@@ -15,12 +15,12 @@ import { AuthService } from '../auth.service';
 export class AuthGuard implements NestMiddleware {
   constructor(
     private readonly authService: AuthService,
-    private readonly userService: UsersService,
+    private readonly userService: UsersService
   ) {}
   async use(
     request: Request,
     res: Response,
-    next: NextFunction,
+    next: NextFunction
   ): Promise<void> {
     try {
       const { authorization }: { authorization?: string } = request.headers;
@@ -38,7 +38,7 @@ export class AuthGuard implements NestMiddleware {
       return next();
     } catch (error) {
       throw new ForbiddenException(
-        error.message || 'session expired! Please sign In',
+        error.message || 'session expired! Please sign In'
       );
     }
   }

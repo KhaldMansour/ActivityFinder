@@ -3,7 +3,7 @@ import {
   Column,
   BeforeInsert,
   PrimaryGeneratedColumn,
-  OneToMany,
+  OneToMany
 } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
 import { Exclude } from 'class-transformer';
@@ -13,28 +13,28 @@ import { Activity } from 'src/activity/entities/activity.entity';
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
-  id: number;
+    id: number;
 
   @Column({ nullable: true })
-  firstName: string;
+    firstName: string;
 
   @Column({ nullable: true })
-  lastName: string;
+    lastName: string;
 
   @Column({ unique: true })
   @Exclude()
-  email: string;
+    email: string;
 
   @Column()
   @Exclude()
-  password: string;
+    password: string;
 
   @Column({ default: false })
   @Exclude()
-  isAdmin: boolean;
+    isAdmin: boolean;
 
   @OneToMany(() => Activity, (activity) => activity.supplier)
-  activities: Activity[];
+    activities: Activity[];
 
   @BeforeInsert()
   async hashPassword(): Promise<void> {

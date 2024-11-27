@@ -6,7 +6,7 @@ import {
   Patch,
   Param,
   Delete,
-  Request,
+  Request
 } from '@nestjs/common';
 import { Request as ExpressRequest } from 'express';
 import { plainToInstance } from 'class-transformer';
@@ -27,12 +27,12 @@ export class ActivityController {
   @Post()
   async create(
     @Body() createActivityDto: CreateActivityDto,
-    @Request() request: ExpressRequest,
+    @Request() request: ExpressRequest
   ): Promise<Activity> {
     const user = request.user;
     return await this.activityService.create(
       plainToInstance(User, user),
-      createActivityDto,
+      createActivityDto
     ); // Hemdan
   }
 
@@ -50,7 +50,7 @@ export class ActivityController {
   async update(
     @Param('id') id: string,
     @Body() updateActivityDto: UpdateActivityDto,
-    @Request() request: ExpressRequest,
+    @Request() request: ExpressRequest
   ): Promise<Activity> {
     const user = request.user;
     return await this.activityService.update(+id, updateActivityDto, user);
@@ -59,7 +59,7 @@ export class ActivityController {
   @Delete(':id')
   async remove(
     @Param('id') id: string,
-    @Request() request: ExpressRequest,
+    @Request() request: ExpressRequest
   ): Promise<Activity> {
     const user = request.user;
     return await this.activityService.remove(+id, user);

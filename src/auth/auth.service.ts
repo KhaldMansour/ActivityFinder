@@ -17,7 +17,7 @@ export class AuthService {
     @InjectRepository(User)
     private userRepository: Repository<User>,
     private jwtService: JwtService,
-    private configService: ConfigService,
+    private configService: ConfigService
   ) {}
 
   async register(registerUserDto: RegisterUserDto): Promise<User> {
@@ -41,13 +41,13 @@ export class AuthService {
     const payload = { userId: user.id, email: user.email };
 
     return {
-      access_token: await this.jwtService.signAsync(payload),
+      access_token: await this.jwtService.signAsync(payload)
     };
   }
 
   async validateToken(token: string): Promise<JwtPayload> {
     return await this.jwtService.verifyAsync(token, {
-      secret: this.configService.get<string>('JWT_SECRET'),
+      secret: this.configService.get<string>('JWT_SECRET')
     });
   }
 }

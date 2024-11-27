@@ -9,7 +9,7 @@ describe('ActivityController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ActivityController],
-      providers: [ActivityService],
+      providers: [ActivityService]
     }).compile();
 
     controller = module.get<ActivityController>(ActivityController);

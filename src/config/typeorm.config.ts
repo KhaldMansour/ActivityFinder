@@ -4,7 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 export const typeOrmConfig = {
   imports: [ConfigModule], // HEMDAN
   useFactory: async (
-    configService: ConfigService,
+    configService: ConfigService
   ): Promise<TypeOrmModuleOptions> => ({
     type: 'mysql',
     host: configService.get<string>('DB_HOST'),
@@ -14,7 +14,7 @@ export const typeOrmConfig = {
     database: configService.get<string>('DB_DATABASE'),
     synchronize: false,
     entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-    migrations: [__dirname + '/../migrations/**/*{.ts,.js}'],
+    migrations: [__dirname + '/../migrations/**/*{.ts,.js}']
   }),
-  inject: [ConfigService], // HEMDAN
+  inject: [ConfigService] // HEMDAN
 };

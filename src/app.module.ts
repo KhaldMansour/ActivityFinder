@@ -13,15 +13,15 @@ import { ActivityModule } from './activity/activity.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true, // hemdan
+      isGlobal: true // hemdan
     }),
     TypeOrmModule.forRootAsync(typeOrmConfig),
     UsersModule,
     AuthModule,
-    ActivityModule,
+    ActivityModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService]
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer): void {
@@ -29,7 +29,7 @@ export class AppModule {
       .apply(AuthGuard)
       .exclude(
         { path: '/auth/login', method: RequestMethod.POST },
-        { path: '/auth/register', method: RequestMethod.POST },
+        { path: '/auth/register', method: RequestMethod.POST }
       )
       .forRoutes('*');
   }
