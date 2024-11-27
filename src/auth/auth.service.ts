@@ -9,6 +9,7 @@ import { User } from 'src/users/entities/user.entity';
 
 import { RegisterUserDto } from './dto/register-user.dto';
 import { LoginDto } from './dto/login.dto';
+import { JwtPayload } from './interfaces/jwt-payload.interface';
 
 @Injectable()
 export class AuthService {
@@ -44,7 +45,7 @@ export class AuthService {
     };
   }
 
-  async validateToken(token: string) {
+  async validateToken(token: string): Promise<JwtPayload>{
     return await this.jwtService.verifyAsync(token, {
       secret: this.configService.get<string>('JWT_SECRET')
     });
