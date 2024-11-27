@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Request } from '@nestjs/common';
 import { Request as ExpressRequest } from 'express';
 import { plainToInstance } from 'class-transformer';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 import { User } from 'src/users/entities/user.entity';
 
@@ -10,6 +11,7 @@ import { UpdateActivityDto } from './dto/update-activity.dto';
 import { Activity } from './entities/activity.entity';
 
 @Controller('activities')
+@ApiBearerAuth('JWT') 
 export class ActivityController {
   constructor(private readonly activityService: ActivityService) {}
 
@@ -25,7 +27,7 @@ export class ActivityController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise <Activity> {
+  async findOne(@Param('id') id: string): Promise <Activity> {    
     return await this.activityService.findOne(+id);
   }
 
