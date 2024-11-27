@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Request } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Request,
+} from '@nestjs/common';
 import { Request as ExpressRequest } from 'express';
 import { plainToInstance } from 'class-transformer';
 import { ApiBearerAuth } from '@nestjs/swagger';
@@ -11,34 +20,47 @@ import { UpdateActivityDto } from './dto/update-activity.dto';
 import { Activity } from './entities/activity.entity';
 
 @Controller('activities')
-@ApiBearerAuth('JWT') 
+@ApiBearerAuth('JWT')
 export class ActivityController {
   constructor(private readonly activityService: ActivityService) {}
 
   @Post()
-  async create(@Body() createActivityDto: CreateActivityDto , @Request() request: ExpressRequest): Promise <Activity> {
+  async create(
+    @Body() createActivityDto: CreateActivityDto,
+    @Request() request: ExpressRequest,
+  ): Promise<Activity> {
     const user = request.user;
-    return await this.activityService.create(plainToInstance(User , user) , createActivityDto); // Hemdan
+    return await this.activityService.create(
+      plainToInstance(User, user),
+      createActivityDto,
+    ); // Hemdan
   }
 
   @Get()
-  async findAll(): Promise <Activity[]> {
+  async findAll(): Promise<Activity[]> {
     return await this.activityService.findAll();
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise <Activity> {    
+  async findOne(@Param('id') id: string): Promise<Activity> {
     return await this.activityService.findOne(+id);
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateActivityDto: UpdateActivityDto , @Request() request: ExpressRequest): Promise<Activity> {
+  async update(
+    @Param('id') id: string,
+    @Body() updateActivityDto: UpdateActivityDto,
+    @Request() request: ExpressRequest,
+  ): Promise<Activity> {
     const user = request.user;
     return await this.activityService.update(+id, updateActivityDto, user);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string , @Request() request: ExpressRequest): Promise <Activity> {
+  async remove(
+    @Param('id') id: string,
+    @Request() request: ExpressRequest,
+  ): Promise<Activity> {
     const user = request.user;
     return await this.activityService.remove(+id, user);
   }

@@ -8,7 +8,7 @@ async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api/v1/');
 
-  const configService = app.get(ConfigService);  
+  const configService = app.get(ConfigService);
   const swaggerConfig = new DocumentBuilder()
     .setTitle(configService.get<string>('APP_NAME') ?? 'Activity Finder')
     .setDescription('The API description')
@@ -19,18 +19,18 @@ async function bootstrap(): Promise<void> {
         name: 'Authorization',
         bearerFormat: 'Bearer',
         scheme: 'Bearer',
-        type: 'http', 
-        in: 'Header'
+        type: 'http',
+        in: 'Header',
       },
-      'JWT'
+      'JWT',
     )
     .build();
-    
+
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api/docs', app, document, {
     swaggerOptions: {
-      persistAuthorization: true
-    }
+      persistAuthorization: true,
+    },
   });
 
   await app.listen(3000);

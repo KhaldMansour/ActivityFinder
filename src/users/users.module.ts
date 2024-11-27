@@ -10,9 +10,13 @@ import { UsersController } from './users.controller';
 import { User } from './entities/user.entity';
 
 @Module({
-  imports: [forwardRef(() => AuthModule), TypeOrmModule.forFeature([User , Activity]) , ActivityModule],
+  imports: [
+    forwardRef(() => AuthModule),
+    TypeOrmModule.forFeature([User, Activity]),
+    ActivityModule,
+  ],
   controllers: [UsersController],
   providers: [UsersService],
-  exports: [TypeOrmModule , UsersService ]
+  exports: [TypeOrmModule, UsersService],
 })
 export class UsersModule {}

@@ -8,7 +8,10 @@ import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectRepository(User) private readonly userRepository: Repository<User>, private authServ: AuthService){}
+  constructor(
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
+    private authServ: AuthService,
+  ) {}
 
   // create(createUserDto: CreateUserDto) {
   //   return 'This action adds a new user';
@@ -31,6 +34,6 @@ export class UsersService {
   // }
 
   async findById(id: number): Promise<User> {
-    return await await this.userRepository.findOneBy({id});
-  } 
+    return await await this.userRepository.findOneBy({ id });
+  }
 }
