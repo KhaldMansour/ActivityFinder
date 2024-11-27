@@ -40,7 +40,7 @@ export class ActivityService {
       throw new NotFoundException('Activity not found');
     }
   
-    return plainToInstance(Activity, activity, { excludeExtraneousValues: true });
+    return plainToInstance(Activity, activity);
   }
 
   async update(id: number, updateActivityDto: UpdateActivityDto , user: User): Promise <Activity> {
