@@ -34,7 +34,7 @@ export class User {
     isAdmin: boolean;
 
   @OneToMany(() => Activity, (activity) => activity.supplier)
-    activities: Activity[];
+    activities?: Activity[];
 
   @BeforeInsert()
   async hashPassword(): Promise<void> {
