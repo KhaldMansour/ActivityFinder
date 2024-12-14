@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import * as bcrypt from 'bcryptjs';
+import { plainToInstance } from 'class-transformer';
 
 import { User } from 'src/users/entities/user.entity';
 
@@ -22,24 +23,24 @@ export class AuthService {
 
   async register(registerUserDto: RegisterUserDto): Promise<User> {
     const user = this.userRepository.create(registerUserDto);
-    return await this.userRepository.save(user);
+    return plainToInstance(User, await this.userRepository.save(user));
   }
 
   async login(data: LoginDto): Promise<{ access_token: string }> {
     const user = await this.userRepository.findOneBy({ email: data.email });
-
+    
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
-
+    
     const passwordMatches = await bcrypt.compare(data.password, user.password);
-
-    if (!passwordMatches) {
+    
+    if (!passwordMatches) {     
       throw new UnauthorizedException('Invalid credentials');
     }
-
+    
     const payload = { userId: user.id, email: user.email };
-
+    
     return {
       access_token: await this.jwtService.signAsync(payload)
     };

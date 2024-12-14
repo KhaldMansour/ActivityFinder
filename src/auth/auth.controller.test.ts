@@ -1,17 +1,19 @@
-import { AuthService } from './auth.service';
-import { RegisterUserDto } from './dto/register-user.dto';
-import { LoginDto } from './dto/login.dto';
-import { User } from 'src/users/entities/user.entity'; // Import User entity
 import * as request from 'supertest';
-import { createTestingModule } from 'src/helpers/test-helper';
 import { INestApplication } from '@nestjs/common';
-import { AuthController } from './auth.controller';
-import { JwtService } from '@nestjs/jwt';
-import { ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { faker } from '@faker-js/faker/.';
 import { Repository } from 'typeorm';
-
 import * as dotenv from 'dotenv';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Test, TestingModule } from '@nestjs/testing';
+
+import { User } from 'src/users/entities/user.entity'; 
+import { Activity } from 'src/activity/entities/activity.entity';
+
+import { AuthModule } from './auth.module';
+import { RegisterUserDto } from './dto/register-user.dto';
+import { LoginDto } from './dto/login.dto';
+
 dotenv.config({ path: './.env.test' });
 
 describe('AuthController (integration)', () => {
@@ -19,10 +21,23 @@ describe('AuthController (integration)', () => {
   let userRepository: Repository<User>;
 
   beforeAll(async () => {
-    app = await createTestingModule([], AuthController, [AuthService,
-      ConfigService,
-      JwtService,] , [User]);
-      userRepository = app.get('UserRepository');
+    const moduleFixture: TestingModule = await Test.createTestingModule({
+      imports: [
+        TypeOrmModule.forRoot({
+          type: 'sqlite',
+          database: ':memory:',
+          entities: [User , Activity],
+          synchronize: true
+        }),
+        AuthModule,
+        ConfigModule.forRoot({ isGlobal: true })
+      ]
+    }).compile();
+  
+    app = moduleFixture.createNestApplication();
+  
+    await app.init();
+    userRepository = app.get('UserRepository');
   });
 
   afterAll(async () => {
@@ -33,42 +48,39 @@ describe('AuthController (integration)', () => {
     const email = faker.internet.email();
     const firstName = faker.person.firstName();
     const lastName = faker.person.lastName();
+    const password = faker.internet.password();
     const registerDto: RegisterUserDto = {
       email,
-      password: 'password123',
+      password,
       firstName,
-      lastName,
+      lastName
     };
 
     const response = await request(app.getHttpServer())
       .post('/auth/register')
-      .send(registerDto)
-      .expect(201);
-
+      .send(registerDto);    
+    
+    expect(response.status).toBe(201);
     expect(response.body).toHaveProperty('id');
     expect(response.body.email).toBe(email);
     expect(response.body.firstName).toBe(firstName);
     expect(response.body.lastName).toBe(lastName);
     expect(response.body).not.toHaveProperty('password');
   });
-  
 
   it('should login a user and return an access token', async () => {
-
     const email = faker.internet.email();
     const firstName = faker.person.firstName();
     const lastName = faker.person.lastName();
     const password = faker.internet.password();
-
     const validUser: RegisterUserDto = {
       email,
       password,
       firstName,
-      lastName,
+      lastName
     };
     const user = userRepository.create(validUser);
-    const createdUser = await userRepository.save(user);
-
+    await userRepository.save(user);
     const loginDto: LoginDto = {
       email,
       password
@@ -76,11 +88,9 @@ describe('AuthController (integration)', () => {
 
     const response = await request(app.getHttpServer())
       .post('/auth/login')
-      .send(loginDto)
+      .send(loginDto);
 
-      // console.log('JWT_SECRET:', process.env.JWT_SECRET); 
-
-
+    expect(response.status).toBe(200);
     expect(response.body).toHaveProperty('access_token');
   });
 });

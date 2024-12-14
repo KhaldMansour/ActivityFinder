@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 
 import { User } from 'src/users/entities/user.entity';
 
@@ -16,6 +16,7 @@ export class AuthController {
   }
 
   @Post('login')
+  @HttpCode(HttpStatus.OK) 
   async login(@Body() loginDto: LoginDto): Promise<{ access_token: string }> {
     return await this.authService.login(loginDto);
   }
