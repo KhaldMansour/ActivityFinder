@@ -9,7 +9,7 @@ import { Request, Response, NextFunction } from 'express';
 import { UsersService } from 'src/users/users.service';
 import { User } from 'src/users/entities/user.entity';
 
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class AuthGuard implements NestMiddleware {

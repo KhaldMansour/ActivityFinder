@@ -8,9 +8,9 @@ import { plainToInstance } from 'class-transformer';
 
 import { User } from 'src/users/entities/user.entity';
 
-import { RegisterUserDto } from './dto/register-user.dto';
-import { LoginDto } from './dto/login.dto';
-import { JwtPayload } from './interfaces/jwt-payload.interface';
+import { RegisterUserDto } from '../dto/register-user.dto';
+import { LoginDto } from '../dto/login.dto';
+import { JwtPayload } from '../interfaces/jwt-payload.interface';
 
 @Injectable()
 export class AuthService {
