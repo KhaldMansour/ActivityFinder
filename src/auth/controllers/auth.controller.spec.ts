@@ -4,10 +4,11 @@ import * as bcrypt from 'bcryptjs';
 
 import { User } from 'src/users/entities/user.entity';
 
-import { AuthController } from './auth.controller';
 import { AuthService } from '../services/auth.service';
 import { RegisterUserDto } from '../dto/register-user.dto';
 import { LoginDto } from '../dto/login.dto';
+
+import { AuthController } from './auth.controller';
 
 describe('AuthController', () => {
   let controller: AuthController;

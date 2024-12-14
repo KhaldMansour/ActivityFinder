@@ -9,10 +9,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 import { User } from 'src/users/entities/user.entity'; 
 import { Activity } from 'src/activity/entities/activity.entity';
+
 import { AuthModule } from '../auth.module';
 import { RegisterUserDto } from '../dto/register-user.dto';
 import { LoginDto } from '../dto/login.dto';
-
 
 dotenv.config({ path: './.env.test' });
 
