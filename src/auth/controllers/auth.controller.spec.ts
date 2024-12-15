@@ -45,7 +45,7 @@ describe('AuthController', () => {
       const hashedPassword = await  bcrypt.hash('password', 10);
       const email = faker.internet.email();
       const registerUserDto: RegisterUserDto = { email, password : hashedPassword , firstName , lastName };
-      const result: Partial<User> = { id: 1, email, password: hashedPassword , firstName , lastName , isAdmin: false};
+      const result = { id: 1, email, password: hashedPassword , firstName , lastName , isAdmin: false} as User;
       mockAuthService.register.mockResolvedValue(result);
 
       const response = await controller.register(registerUserDto);
