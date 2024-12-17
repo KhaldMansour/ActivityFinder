@@ -9,9 +9,9 @@ import { plainToInstance } from 'class-transformer';
 
 import { User } from 'src/users/entities/user.entity';
 
-import { Activity } from './entities/activity.entity';
-import { UpdateActivityDto } from './dto/update-activity.dto';
-import { CreateActivityDto } from './dto/create-activity.dto';
+import { Activity } from '../entities/activity.entity';
+import { CreateActivityDto } from '../dto/create-activity.dto';
+import { UpdateActivityDto } from '../dto/update-activity.dto';
 
 @Injectable()
 export class ActivityService {
@@ -23,7 +23,7 @@ export class ActivityService {
   async create(
     user: User,
     createActivityDto: CreateActivityDto
-  ): Promise<Activity> {
+  ): Promise<Activity> {    
     const activity = this.activityRepository.create({
       ...createActivityDto,
       supplier: user

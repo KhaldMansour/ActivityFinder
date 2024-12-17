@@ -33,9 +33,7 @@ jest.mock('@nestjs/jwt');
 
 describe('AuthService', () => {
   let authService: AuthService;
-  let userRepository: typeof mockUserRepository;
   let jwtService:  JwtService;
-  let configService: ConfigService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -48,9 +46,7 @@ describe('AuthService', () => {
     }).compile();
 
     authService = module.get<AuthService>(AuthService);
-    userRepository = module.get(getRepositoryToken(User));
     jwtService = module.get<JwtService>(JwtService);
-    configService = module.get<ConfigService>(ConfigService);
   });
 
   afterEach(() => {

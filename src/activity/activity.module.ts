@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { ActivityService } from './activity.service';
-import { ActivityController } from './activity.controller';
 import { Activity } from './entities/activity.entity';
+import { ActivityController } from './controllers/activity.controller';
+import { ActivityService } from './services/activity.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Activity])],
