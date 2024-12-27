@@ -12,6 +12,7 @@ export class CreateUserDto {
 
   @MinLength(6)
     password: string;
-    @IsBoolean()
-      isAdmin?: boolean;
+    
+  @IsBoolean()
+    isAdmin?: boolean;
 }

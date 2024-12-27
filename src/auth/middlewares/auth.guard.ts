@@ -6,10 +6,10 @@ import {
 } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
 
-import { UsersService } from 'src/users/users.service';
 import { User } from 'src/users/entities/user.entity';
 
 import { AuthService } from '../services/auth.service';
+import { UsersService } from 'src/users/services/users.service';
 
 @Injectable()
 export class AuthGuard implements NestMiddleware {

@@ -6,7 +6,6 @@ import { ConfigModule } from '@nestjs/config';
 import { faker } from '@faker-js/faker/.';
 import { Repository } from 'typeorm';
 
-import { UsersService } from 'src/users/users.service';
 import { UsersModule } from 'src/users/users.module';
 import { AppModule } from 'src/app.module';
 import { User } from 'src/users/entities/user.entity';
@@ -17,6 +16,7 @@ import { Activity } from '../entities/activity.entity';
 import { ActivityService } from '../services/activity.service';
 
 import { ActivityController } from './activity.controller';
+import { UsersService } from 'src/users/services/users.service';
 
 describe('ActivityController (Integration)', () => {
   let app: INestApplication;

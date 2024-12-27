@@ -5,9 +5,9 @@ import { AuthModule } from 'src/auth/auth.module';
 import { Activity } from 'src/activity/entities/activity.entity';
 import { ActivityModule } from 'src/activity/activity.module';
 
-import { UsersService } from './users.service';
-import { UsersController } from './users.controller';
 import { User } from './entities/user.entity';
+import { UsersController } from './controllers/users.controller';
+import { UsersService } from './services/users.service';
 
 @Module({
   imports: [
