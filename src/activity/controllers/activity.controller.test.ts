@@ -10,13 +10,13 @@ import { UsersModule } from 'src/users/users.module';
 import { AppModule } from 'src/app.module';
 import { User } from 'src/users/entities/user.entity';
 import { AuthService } from 'src/auth/services/auth.service';
+import { UsersService } from 'src/users/services/users.service';
 
 import { ActivityModule } from '../activity.module';
 import { Activity } from '../entities/activity.entity';
 import { ActivityService } from '../services/activity.service';
 
 import { ActivityController } from './activity.controller';
-import { UsersService } from 'src/users/services/users.service';
 
 describe('ActivityController (Integration)', () => {
   let app: INestApplication;

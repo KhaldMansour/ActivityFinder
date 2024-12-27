@@ -1,20 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { AppModule } from './app.module';
-import { ResponseInterceptor } from './interceptors/response.interceptor';
-import { AuthGuard } from './auth/middlewares/auth.guard';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ActivityModule } from './activity/activity.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { MiddlewareConsumer, NestMiddleware } from '@nestjs/common';
-import { APP_INTERCEPTOR } from '@nestjs/core';
 
 describe('AppModule', () => {
   let appModule: TestingModule;
 
   beforeAll(async () => {
     appModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [AppModule]
     }).compile();
   });
 

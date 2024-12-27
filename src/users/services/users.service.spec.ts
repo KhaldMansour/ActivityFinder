@@ -1,10 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UsersService } from './users.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { User } from '../entities/user.entity';
 import { Repository } from 'typeorm';
+import { faker } from '@faker-js/faker/.';
+
+import { User } from '../entities/user.entity';
 import { CreateUserDto } from '../dto/create-user.dto';
-import { fa, faker } from '@faker-js/faker/.';
+
+import { UsersService } from './users.service';
 
 describe('UsersService', () => {
   let service: UsersService;
@@ -13,7 +15,7 @@ describe('UsersService', () => {
   const mockUserRepository = {
     findOneBy: jest.fn(),
     create: jest.fn(),
-    save: jest.fn(),
+    save: jest.fn()
   };
 
   beforeEach(async () => {
@@ -22,9 +24,9 @@ describe('UsersService', () => {
         UsersService,
         {
           provide: getRepositoryToken(User),
-          useValue: mockUserRepository, // Use the mocked repository
-        },
-      ],
+          useValue: mockUserRepository // Use the mocked repository
+        }
+      ]
     }).compile();
 
     service = module.get<UsersService>(UsersService);
@@ -66,7 +68,6 @@ describe('UsersService', () => {
         
       expect(userRepository.save).not.toHaveBeenCalled();
     });
-    
   });
 
   describe('findById', () => {

@@ -1,12 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ActivityService } from './activity.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { Activity } from '../entities/activity.entity';
-import { User } from 'src/users/entities/user.entity';
 import { Repository } from 'typeorm';
 import { NotFoundException, ForbiddenException } from '@nestjs/common';
+
+import { User } from 'src/users/entities/user.entity';
+
+import { Activity } from '../entities/activity.entity';
 import { CreateActivityDto } from '../dto/create-activity.dto';
 import { UpdateActivityDto } from '../dto/update-activity.dto';
+
+import { ActivityService } from './activity.service';
 
 describe('ActivityService', () => {
   let service: ActivityService;
@@ -19,9 +22,9 @@ describe('ActivityService', () => {
         ActivityService,
         {
           provide: getRepositoryToken(Activity),
-          useClass: Repository,
-        },
-      ],
+          useClass: Repository
+        }
+      ]
     }).compile();
 
     service = module.get<ActivityService>(ActivityService);
@@ -36,13 +39,11 @@ describe('ActivityService', () => {
       const createActivityDto = new CreateActivityDto();
       createActivityDto.title = 'Activity 1';
       createActivityDto.price = 10.25;
-
       const savedActivity = new Activity();
       savedActivity.id = 1;
       savedActivity.title = createActivityDto.title;
       savedActivity.price = createActivityDto.price;
       savedActivity.supplier = user;
-
       jest.spyOn(activityRepository, 'create').mockReturnValue(savedActivity);
       jest.spyOn(activityRepository, 'save').mockResolvedValue(savedActivity);
 
@@ -51,7 +52,7 @@ describe('ActivityService', () => {
       expect(result).toEqual(savedActivity);
       expect(activityRepository.create).toHaveBeenCalledWith({
         ...createActivityDto,
-        supplier: user,
+        supplier: user
       });
       expect(activityRepository.save).toHaveBeenCalledWith(savedActivity);
     });
@@ -74,7 +75,6 @@ describe('ActivityService', () => {
       const activity = new Activity();
       activity.id = 1;
       activity.supplier = user;
-
       jest.spyOn(activityRepository, 'findOne').mockResolvedValue(activity);
 
       const result = await service.findOne(1);
@@ -82,7 +82,7 @@ describe('ActivityService', () => {
       expect(result).toEqual(activity);
       expect(activityRepository.findOne).toHaveBeenCalledWith({
         where: { id: 1 },
-        relations: ['supplier'],
+        relations: ['supplier']
       });
     });
 
@@ -98,10 +98,8 @@ describe('ActivityService', () => {
       const existingActivity = new Activity();
       existingActivity.id = 1;
       existingActivity.supplier = user;
-
       const updateDto = new UpdateActivityDto();
       updateDto.title = 'Updated Activity';
-
       jest.spyOn(activityRepository, 'findOne').mockResolvedValue(existingActivity);
       jest.spyOn(activityRepository, 'save').mockResolvedValue(existingActivity);
 
@@ -122,7 +120,6 @@ describe('ActivityService', () => {
       activity.id = 1;
       activity.supplier = new User();
       activity.supplier.id = 2;
-
       const updateDto = new UpdateActivityDto();
       jest.spyOn(activityRepository, 'findOne').mockResolvedValue(activity);
 
@@ -135,7 +132,6 @@ describe('ActivityService', () => {
       const activity = new Activity();
       activity.id = 1;
       activity.supplier = user;
-
       jest.spyOn(activityRepository, 'findOne').mockResolvedValue(activity);
       jest.spyOn(activityRepository, 'remove').mockResolvedValue(activity);
 
