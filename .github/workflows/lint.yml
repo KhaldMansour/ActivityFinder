@@ -1,0 +1,26 @@
+name: Lint Check
+
+on:
+  push:
+    branches:
+      - master # or any branch you want to trigger the lint check on
+  pull_request:
+    branches:
+      - master # or any branch you want to trigger the lint check on
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Lint
+        run: npm run lint
