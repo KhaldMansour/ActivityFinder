@@ -3,24 +3,20 @@ import {
   Controller,
   HttpCode,
   HttpStatus,
-  Post,
-  UseInterceptors
+  Post
 } from '@nestjs/common';
-
-import { User } from 'src/users/entities/user.entity';
-
-import { AuthService } from '../services/auth.service';
-import { RegisterUserDto } from '../dto/register-user.dto';
-import { LoginDto } from '../dto/login.dto';
 import {
   ApiBadRequestResponse,
   ApiBody,
   ApiOperation,
   ApiResponse
 } from '@nestjs/swagger';
-import { ApiResponseDto } from 'src/dto/api-response.dto';
-import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
-import { first } from 'rxjs';
+
+import { User } from 'src/users/entities/user.entity';
+
+import { AuthService } from '../services/auth.service';
+import { RegisterUserDto } from '../dto/register-user.dto';
+import { LoginDto } from '../dto/login.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -43,7 +39,7 @@ export class AuthController {
             id: 1,
             firstName: 'John',
             lastName: 'Doe',
-            email: 'user@example.com',
+            email: 'user@example.com'
           }
         },
         error: { type: 'string', nullable: true }

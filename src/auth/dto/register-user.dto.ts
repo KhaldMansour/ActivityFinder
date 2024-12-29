@@ -4,29 +4,29 @@ import { IsString, IsEmail, MinLength } from 'class-validator';
 export class RegisterUserDto {
   @ApiProperty({
     description: 'The first name of the user',
-    example: 'John',
+    example: 'John'
   })
   @IsString()
-  firstName: string;
+    firstName: string;
 
   @ApiProperty({
     description: 'The last name of the user',
-    example: 'Doe',
+    example: 'Doe'
   })
   @IsString()
-  lastName: string;
+    lastName: string;
 
   @ApiProperty({
     description: 'The email of the user',
-    example: 'user@example.com',
+    example: 'user@example.com'
   })
   @IsEmail()
-  email: string;
+    email: string;
 
   @ApiProperty({
     description: 'The password of the user (at least 6 characters)',
-    example: 'strongpassword123',
+    example: 'strongpassword123'
   })
   @MinLength(6)
-  password: string;
+    password: string;
 }
