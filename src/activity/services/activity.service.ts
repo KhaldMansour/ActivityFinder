@@ -93,7 +93,8 @@ export class ActivityService {
         'You are not authorized to update this activity'
       );
     }
-
-    return await this.activityRepository.remove(activity);
+    const deletedActivity = await this.activityRepository.remove(activity);
+    
+    return plainToInstance(Activity, deletedActivity);
   }
 }
