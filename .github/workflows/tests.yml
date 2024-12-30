@@ -1,15 +1,15 @@
-name: Lint Check
+name: Run Tests
 
 on:
   push:
     branches:
-      - master # or any branch you want to trigger the lint check on
+      - master
   pull_request:
     branches:
-      - master # or any branch you want to trigger the lint check on
+      - master
 
 jobs:
-  lint:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,5 +22,5 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run Lint
-        run: npm run lint
+      - name: Run Tests
+        run: npm run test
