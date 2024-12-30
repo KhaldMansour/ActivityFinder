@@ -3,10 +3,10 @@ name: Lint Check
 on:
   push:
     branches:
-      - master # or any branch you want to trigger the lint check on
+      - main 
   pull_request:
     branches:
-      - master # or any branch you want to trigger the lint check on
+      - main
 
 jobs:
   lint:
