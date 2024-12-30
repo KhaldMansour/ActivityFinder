@@ -83,11 +83,11 @@ GitHub Actions are configured to automate linting and testing tasks.
 
 #### Linting
 
-A GitHub Action (`lint.yml`) runs the `npm run lint` command to ensure code quality. The workflow triggers on `push` or `pull_request` to the `master` branch.
+A GitHub Action (`lint.yml`) runs the `npm run lint` command to ensure code quality. The workflow triggers on `push` or `pull_request` to the `main` branch.
 
 #### Running Tests
 
-A separate GitHub Action (`test.yml`) is configured to run tests automatically using the `npm run test` command. This also triggers on `push` or `pull_request` to the `master` branch.
+A separate GitHub Action (`test.yml`) is configured to run tests automatically using the `npm run test` command. This also triggers on `push` or `pull_request` to the `main` branch.
 
 ## Usage
 
