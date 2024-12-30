@@ -1,85 +1,105 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# ActivityFinder
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This is a NestJS application that implements the following features:
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+- **Authentication System**: User registration and login functionality.
+- **Activity Management**: Users can create and own activities, with the ability to index activities by title.
+- **Swagger Documentation**: Auto-generated Swagger UI for API documentation.
+- **Unit and Integration Tests**: Testing for various parts of the application, including unit and integration tests.
+- **GitHub Actions**: Configured workflows for linting and running tests.
 
-## Description
+## Table of Contents
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- [Installation](#installation)
+- [Features](#features)
+  - [Authentication](#authentication)
+  - [Activities](#activities)
+  - [Swagger Documentation](#swagger-documentation)
+  - [Testing](#testing)
+  - [GitHub Actions](#github-actions)
+- [Usage](#usage)
 
-## Project setup
 
-```bash
-$ npm install
-```
+## Installation
 
-## Compile and run the project
+To get started with the project, follow these steps:
 
-```bash
-# development
-$ npm run start
+1. Clone the repository:
+   
+   `git clone https://github.com/KhaldMansour/ActivityFinder.git`
 
-# watch mode
-$ npm run start:dev
+2. Install the dependencies:
 
-# production mode
-$ npm run start:prod
-```
+   `cd nestjs-app`  
+   `npm install`
 
-## Run tests
+3. Set up environment variables (if any). You can use `.env` for local development.
 
-```bash
-# unit tests
-$ npm run test
+## Features
 
-# e2e tests
-$ npm run test:e2e
+### Authentication
 
-# test coverage
-$ npm run test:cov
-```
+The application provides an authentication system that supports user registration and login.
 
-## Resources
+- **Register**: Users can create an account with their first name, last name, email, and password.
+- **Login**: Users can log in with their email and password to obtain a JWT token.
 
-Check out a few resources that may come in handy when working with NestJS:
+### Activities
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Users can create and manage activities. Each activity has the following attributes:
 
-## Support
+- **Title**: The name of the activity.
+- **Price**: The price of the activity.
+- **Rating**: A rating between 0 and 5.
+- **Has Offer**: An optional field indicating whether the activity has an offer.
+- **Supplier**: The user who owns the activity.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### Swagger Documentation
 
-## Stay in touch
+Swagger has been added to the application for API documentation. Once the server is running, visit `http://localhost:3000/api/docs` to access the interactive Swagger UI. 
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+The documentation includes:
+- Endpoints for user registration, login, and activity management.
+- Model descriptions for requests and responses.
+- Example inputs and outputs.
 
-## License
+### Testing
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Unit and integration tests are written using Jest. The tests include:
+
+- Unit tests for service methods and controllers.
+- Integration tests for API endpoints to ensure the system works as expected.
+
+#### Running Tests
+
+To run the tests:
+
+`npm run test`
+
+
+### GitHub Actions
+
+GitHub Actions are configured to automate linting and testing tasks.
+
+#### Linting
+
+A GitHub Action (`lint.yml`) runs the `npm run lint` command to ensure code quality. The workflow triggers on `push` or `pull_request` to the `master` branch.
+
+#### Running Tests
+
+A separate GitHub Action (`test.yml`) is configured to run tests automatically using the `npm run test` command. This also triggers on `push` or `pull_request` to the `master` branch.
+
+## Usage
+
+Once the application is set up, you can run it locally by executing:
+
+`npm run start`
+
+The API will be available at `http://localhost:3000/api/`.
+
+You can also run the application in **development mode** using:
+
+`npm run start:dev`
+
+This will enable live reloading for any code changes.
+
